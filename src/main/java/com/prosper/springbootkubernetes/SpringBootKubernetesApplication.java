@@ -1,4 +1,4 @@
-package com.demo.springbootkubernetes;
+package com.prosper.springbootkubernetes;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

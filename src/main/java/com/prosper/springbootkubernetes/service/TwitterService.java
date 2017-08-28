@@ -1,6 +1,12 @@
-package com.demo.springbootkubernetes.twitter;
+package com.prosper.springbootkubernetes.service;
 
 import java.io.IOException;
+
+import javax.annotation.PostConstruct;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Service;
 
 import twitter4j.StallWarning;
 import twitter4j.Status;
@@ -10,12 +16,16 @@ import twitter4j.TwitterException;
 import twitter4j.TwitterStream;
 import twitter4j.TwitterStreamFactory;
 
-public class TwitterTest {
-
-	public static void main(String[] args) throws TwitterException, IOException{
+@Service
+public class TwitterService {
+	
+	private static final Logger log = LoggerFactory.getLogger(TwitterService.class);
+	
+	@PostConstruct
+	public void init() throws TwitterException, IOException{
 	    StatusListener listener = new StatusListener(){
 	        public void onStatus(Status status) {
-	            System.out.println(status.getUser().getName() + " : " + status.getText());
+	            log.info(status.getUser().getName() + ": " + status.getText());
 	        }
 	        public void onDeletionNotice(StatusDeletionNotice statusDeletionNotice) {}
 	        public void onTrackLimitationNotice(int numberOfLimitedStatuses) {}
@@ -29,7 +39,7 @@ public class TwitterTest {
 	    TwitterStream twitterStream = new TwitterStreamFactory().getInstance();
 	    twitterStream.addListener(listener);
 	    // sample() method internally creates a thread which manipulates TwitterStream and calls these adequate listener methods continuously.
-	    twitterStream.sample();
+	    twitterStream.sample("en");
 	}
 	
 }
