@@ -1,4 +1,4 @@
-package com.demo.springbootkubernetes;
+package com.prosper.springbootkubernetes;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
