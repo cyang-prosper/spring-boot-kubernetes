@@ -21,8 +21,12 @@ public class TwitterService {
 	
 	private static final Logger log = LoggerFactory.getLogger(TwitterService.class);
 	
-	@PostConstruct
-	public void init() throws TwitterException, IOException{
+	private ThreadLocal<TwitterStream> twitterStreamLocal = new ThreadLocal<>();
+	
+	/**
+	 * Start sampling
+	 */
+	public void start() {
 	    StatusListener listener = new StatusListener(){
 	        public void onStatus(Status status) {
 	            log.info(status.getUser().getName() + ": " + status.getText());
@@ -40,6 +44,14 @@ public class TwitterService {
 	    twitterStream.addListener(listener);
 	    // sample() method internally creates a thread which manipulates TwitterStream and calls these adequate listener methods continuously.
 	    twitterStream.sample("en");
+	    twitterStreamLocal.set(twitterStream);
+	}
+	
+	/**
+	 * Stop sampling
+	 */
+	public void stop() {
+		twitterStreamLocal.get().shutdown();
 	}
 	
 }
