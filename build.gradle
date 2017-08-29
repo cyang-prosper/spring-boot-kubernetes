@@ -24,12 +24,12 @@ repositories {
 
 dependencies {
 	
-	compile('org.springframework.boot:spring-boot-starter-actuator')
-	compile('org.springframework.boot:spring-boot-starter-data-rest')
+	compile 'org.springframework.boot:spring-boot-starter-actuator'
+	compile 'org.springframework.boot:spring-boot-starter-data-rest'
 	
 	// Twitter dependencies
 	compile 'org.twitter4j:twitter4j-stream:4.0.6'
 	
 	// Test dependencies
-	testCompile('org.springframework.boot:spring-boot-starter-test')
+	testCompile 'org.springframework.boot:spring-boot-starter-test'
 }
