@@ -10,7 +10,7 @@
 	</appender>
 
 	<appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
-		<file>/srv/output.log</file>
+		<file>./output.log</file>
 		<encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
 			<Pattern>
 				%d{yyyy-MM-dd HH:mm:ss} - %msg%n
@@ -19,7 +19,7 @@
 
 		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
 			<!-- rollover daily -->
-			<fileNamePattern>/srv/archived/output.%d{yyyy-MM-dd}.%i.log</fileNamePattern>
+			<fileNamePattern>./archived/output.%d{yyyy-MM-dd}.%i.log</fileNamePattern>
 			<timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
 				<maxFileSize>10MB</maxFileSize>
 			</timeBasedFileNamingAndTriggeringPolicy>
@@ -35,7 +35,7 @@
 	<!-- Send logs to both console and file audit -->
 	<logger name="com.prosper" level="debug" additivity="false">
 		<appender-ref ref="STDOUT" />
-		<appender-ref ref="FILE" />
+		<!--appender-ref ref="FILE" /-->
 	</logger>
 
 
