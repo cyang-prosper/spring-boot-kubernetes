@@ -1,0 +1,18 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: k8sdemo-deployment
+spec:
+  replicas: 3
+  template:
+    metadata:
+      labels: 
+        app: k8sdemo
+    spec:
+      containers:
+      - name: twitter-sampler
+        image: christopheryang/twitter-sampler
+        ports:
+        - name: tomcat-port
+          containerPort: 8080
+          

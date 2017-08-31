@@ -3,5 +3,5 @@ RUN apk add --update bash && rm -rf /var/cache/apk/*
 EXPOSE  8080
 EXPOSE  8080/udp
 WORKDIR /srv
-ADD build/libs/twitter-sampler-*.jar /srv/twitter-sampler.jar
-CMD java -jar twitter-sampler.jar
+ADD build/libs/twitter-wordcount-*.jar /srv/twitter-wordcount.jar
+CMD java -jar twitter-wordcount.jar

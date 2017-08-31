@@ -1,4 +1,4 @@
-package com.prosper.springbootkubernetes.resources;
+package com.prosper.sbk.twittersampler.resources;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -7,8 +7,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.prosper.springbootkubernetes.dto.TwitterSamplingCommandDto;
-import com.prosper.springbootkubernetes.service.TwitterService;
+import com.prosper.sbk.twittersampler.dto.TwitterSamplingCommandDto;
+import com.prosper.sbk.twittersampler.service.TwitterService;
 
 @RestController
 @RequestMapping("/tweets/samplings")

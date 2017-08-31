@@ -1,6 +1,4 @@
-package com.prosper.springbootkubernetes.service;
-
-import java.io.IOException;
+package com.prosper.sbk.twittersampler.service;
 
 import javax.annotation.PostConstruct;
 
@@ -12,7 +10,6 @@ import twitter4j.StallWarning;
 import twitter4j.Status;
 import twitter4j.StatusDeletionNotice;
 import twitter4j.StatusListener;
-import twitter4j.TwitterException;
 import twitter4j.TwitterStream;
 import twitter4j.TwitterStreamFactory;
 
@@ -24,9 +21,21 @@ public class TwitterService {
 	private ThreadLocal<TwitterStream> twitterStreamLocal = new ThreadLocal<>();
 	
 	/**
+	 * Automatically start the sampling
+	 */
+	@PostConstruct
+	private void init() {
+		start();
+	}
+	
+	/**
 	 * Start sampling
 	 */
 	public void start() {
+		if(twitterStreamLocal.get()!=null) {
+			stop();
+		}
+		
 	    StatusListener listener = new StatusListener(){
 	        public void onStatus(Status status) {
 	            log.info(status.getUser().getName() + ": " + status.getText());

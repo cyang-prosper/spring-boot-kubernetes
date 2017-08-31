@@ -1,4 +1,4 @@
-package com.prosper.springbootkubernetes;
+package com.prosper.sbk.twittersampler;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -7,7 +7,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
-public class SpringBootKubernetesApplicationTests {
+public class TwitterSamplerApplicationTests {
 
 	@Test
 	public void contextLoads() {

@@ -1,4 +1,4 @@
-package com.prosper.springbootkubernetes.resources;
+package com.prosper.sbk.twittersampler.resources;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
@@ -15,7 +15,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.prosper.springbootkubernetes.dto.TwitterSamplingCommandDto;
+import com.prosper.sbk.twittersampler.dto.TwitterSamplingCommandDto;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
@@ -27,8 +27,11 @@ public class TwitterSamplingResourceTest {
 
 	private ObjectMapper objMapper = new ObjectMapper();
 	
+	
 	@Test
 	public void testExecuteTwitterSamplingCommand() throws Exception {
+		Thread.currentThread().sleep(3000);
+		
 		TwitterSamplingCommandDto dto = new TwitterSamplingCommandDto();
 		dto.setCommand(TwitterSamplingCommandDto.Command.START);
 		
