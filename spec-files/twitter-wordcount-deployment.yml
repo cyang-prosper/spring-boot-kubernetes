@@ -10,7 +10,7 @@ spec:
         app: twitter-wordcount
     spec:
       containers:
-      - name: twitter-sampler
+      - name: twitter-wordcount
         image: christopheryang/twitter-wordcount
         ports:
         - name: tomcat-port
