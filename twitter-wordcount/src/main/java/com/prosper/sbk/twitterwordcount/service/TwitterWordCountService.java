@@ -40,14 +40,13 @@ public class TwitterWordCountService {
 			return 0;
 		}
 		
-//		tweet = "Prosper "+tweet; // Purposely added this line for demo rollback
+		tweet = "Prosper "+tweet; // Purposely added this line for demo rollback
 		
 		// Split words by space(s), filter irrelevant words and create a word list
 		List<String> words = Stream
 	            .of(tweet)
 	            .map(w -> w.split("\\s+"))
 	            .flatMap(Arrays::stream)
-	            .map(w -> w.trim())
 	            .filter(w -> w.length()>1) // filter out 1-character words
 	            .map(w -> w.toLowerCase()) // force everything to lowercase
 	            .filter(w -> { // filter out words not starting with an alphabet, @ or #
