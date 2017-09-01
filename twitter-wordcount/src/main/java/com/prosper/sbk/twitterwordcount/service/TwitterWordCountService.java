@@ -1,8 +1,5 @@
 package com.prosper.sbk.twitterwordcount.service;
 
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.LinkedHashMap;
@@ -23,24 +20,13 @@ import com.prosper.sbk.twitterwordcount.util.MapUtil;
 public class TwitterWordCountService {
 	
 	private static Logger log = LoggerFactory.getLogger(TwitterWordCountService.class);
-	
-	private static final Set<String> stopWords;
-	static {
-		try {
-			Path path = Paths.get(TwitterWordCountService.class.getClassLoader().getResource("stopwords.txt").toURI());
-			stopWords = Files.lines(path).collect(Collectors.toSet());
-		}
-		catch(Exception ex) {
-			throw new RuntimeException(ex);
-		}
-	}
-			
-	
+
 	private static final Set<String> suffixSymbols = Stream.of(",", ".", ":", ";", "?", "\"", "'", "%", ")", "}", "]", ">", "-")
 			.collect(Collectors.toSet());
 	
-	
 	private Map<String, Integer> wordCountMap = new LinkedHashMap<>();
+	
+	
 	
 	/**
 	 * 
@@ -53,6 +39,8 @@ public class TwitterWordCountService {
 			log.error("NULL tweet, ignored");
 			return 0;
 		}
+		
+//		tweet = "Prosper "+tweet; // Purposely added this line for demo rollback
 		
 		// Split words by space(s), filter irrelevant words and create a word list
 		List<String> words = Stream
@@ -67,7 +55,7 @@ public class TwitterWordCountService {
             		 	return firstChar==35 || (firstChar>=64 && firstChar<=90) || (firstChar>=97 && firstChar<=122);
 	            })
 	            .map(w -> suffixSymbols.contains(w.substring(w.length()-1))? w.substring(0, w.length()-1): w) // trim off suffix symbols
-	            .filter(w -> !stopWords.contains(w)) // filter out stop words
+	            .filter(w -> !StopWords.stopWords.contains(w)) // filter out stop words
 	            .collect(Collectors.toList());
 		
 		// Populate the word count map
@@ -86,11 +74,11 @@ public class TwitterWordCountService {
 	}
 	
 	/**
-	 * Print out the top 5 words every 5 seconds
+	 * Print out the top 15 words every 5 seconds
 	 */
 	@Scheduled(fixedRate = 5000)
     public void logTop5Words() {
-		System.out.println(getTopNWords(5).toString());
+		System.out.println(getTopNWords(15).toString());
 	}
 	
 	
