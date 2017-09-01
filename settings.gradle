@@ -1,2 +1,3 @@
 rootProject.name='spring-boot-kubernetes'
 include 'twitter-sampler'
+include 'twitter-wordcount'
