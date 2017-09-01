@@ -1,18 +1,17 @@
 apiVersion: extensions/v1beta1
 kind: Deployment
 metadata:
-  name: k8sdemo-deployment
+  name: twitter-wordcount-deployment
 spec:
   replicas: 3
   template:
     metadata:
       labels: 
-        app: k8sdemo
+        app: twitter-wordcount
     spec:
       containers:
       - name: twitter-sampler
-        image: christopheryang/twitter-sampler
+        image: christopheryang/twitter-wordcount
         ports:
         - name: tomcat-port
           containerPort: 8080
-          

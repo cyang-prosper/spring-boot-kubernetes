@@ -1,0 +1,17 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: twitter-sampler-deployment
+spec:
+  replicas: 3
+  template:
+    metadata:
+      labels: 
+        app: twitter-sampler
+    spec:
+      containers:
+      - name: twitter-sampler
+        image: christopheryang/twitter-sampler
+        ports:
+        - name: tomcat-port
+          containerPort: 8080

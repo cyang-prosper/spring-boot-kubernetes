@@ -1,5 +1,5 @@
 FROM java:alpine
-RUN apk add --update bash && rm -rf /var/cache/apk/*
+RUN apk add --update bash && apk add --update curl && rm -rf /var/cache/apk/*
 EXPOSE  8080
 EXPOSE  8080/udp
 WORKDIR /srv
