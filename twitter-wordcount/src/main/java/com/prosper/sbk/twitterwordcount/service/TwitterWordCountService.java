@@ -40,7 +40,7 @@ public class TwitterWordCountService {
 			return 0;
 		}
 		
-		tweet = "Prosper "+tweet; // Purposely added this line for demo rollback
+//		tweet = "Prosper "+tweet; // Purposely added this line for demo rollback
 		
 		// Split words by space(s), filter irrelevant words and create a word list
 		List<String> words = Stream
