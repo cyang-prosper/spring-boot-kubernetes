@@ -48,6 +48,7 @@ public class TwitterSamplingResourceTest {
 		
 		
 		dto.setCommand(TwitterSamplingCommandDto.Command.STOP);
+		System.out.println(objMapper.writeValueAsString(dto));
 		mockMvc.perform(
 				post("/tweets/samplings")
 					.content(objMapper.writeValueAsString(dto))
