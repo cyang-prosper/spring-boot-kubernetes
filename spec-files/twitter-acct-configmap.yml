@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: twitter-acct-config
+  namespace: default
+data:
+  oauth.consumerKey=mockConsuerKey
+  oauth.consumerSecret=mockConsumerSecret
+  oauth.accessToken=mockAccessToken
+  oauth.accessTokenSecret=mockTokenSecret

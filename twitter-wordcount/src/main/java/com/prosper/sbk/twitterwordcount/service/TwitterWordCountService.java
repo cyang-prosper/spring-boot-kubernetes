@@ -1,8 +1,11 @@
 package com.prosper.sbk.twitterwordcount.service;
 
+import java.io.File;
+import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.LinkedHashMap;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -11,6 +14,7 @@ import java.util.stream.Stream;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.core.io.ClassPathResource;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
@@ -23,6 +27,18 @@ public class TwitterWordCountService {
 
 	private static final Set<String> suffixSymbols = Stream.of(",", ".", ":", ";", "?", "\"", "'", "%", ")", "}", "]", ">", "-")
 			.collect(Collectors.toSet());
+	
+	private static final List<String> stopwords;
+	static {
+		try {
+			File stopwordsFile = new ClassPathResource("stopwords.txt").getFile();
+			stopwords = Files.readAllLines(stopwordsFile.toPath());
+		}
+		catch(Exception ex) {
+			log.error(ex.getMessage(), ex);
+			throw new RuntimeException(ex);
+		}
+	}
 	
 	private Map<String, Integer> wordCountMap = new LinkedHashMap<>();
 	
@@ -54,7 +70,8 @@ public class TwitterWordCountService {
             		 	return firstChar==35 || (firstChar>=64 && firstChar<=90) || (firstChar>=97 && firstChar<=122);
 	            })
 	            .map(w -> suffixSymbols.contains(w.substring(w.length()-1))? w.substring(0, w.length()-1): w) // trim off suffix symbols
-	            .filter(w -> !StopWords.stopWords.contains(w)) // filter out stop words
+//	            .filter(w -> !StopWords.stopWords.contains(w)) // filter out stop words
+	            .filter(w -> !stopwords.contains(w))
 	            .collect(Collectors.toList());
 		
 		// Populate the word count map
@@ -77,6 +94,7 @@ public class TwitterWordCountService {
 	 */
 	@Scheduled(fixedRate = 5000)
     public void logTop5Words() {
+		processTweet("this is a test. test this if you can.");
 		System.out.println(getTopNWords(15).toString());
 	}
 	
