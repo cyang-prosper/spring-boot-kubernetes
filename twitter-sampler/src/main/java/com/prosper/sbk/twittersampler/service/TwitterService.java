@@ -60,7 +60,7 @@ public class TwitterService {
 		
 	    StatusListener listener = new StatusListener(){
 	        public void onStatus(Status status) {
-	            //log.debug(status.getUser().getName() + ": " + status.getText());
+	            log.debug(status.getUser().getName() + ": " + status.getText());
 	            sendTweetToWordCount(status.getText());
 	        }
 	        public void onDeletionNotice(StatusDeletionNotice statusDeletionNotice) {}
