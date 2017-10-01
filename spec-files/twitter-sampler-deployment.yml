@@ -15,25 +15,33 @@ spec:
         ports:
         - name: tomcat-port
           containerPort: 8080
-        env:
+        volumeMounts:
+        - name: config-volume
+          mountPath: /etc/config
+        #env:
         # consume the property-like keys in environment variables
-        - name: oauth_consumerKey
-          valueFrom:
-            configMapKeyRef:
-              name: twitter-acct-config
-              key: oauth.consumerKey
-        - name: oauth_consumerSecret
-          valueFrom:
-            configMapKeyRef:
-              name: twitter-acct-config
-              key: oauth.consumerSecret
-        - name: oauth_accessToken
-          valueFrom:
-            configMapKeyRef:
-              name: twitter-acct-config
-              key: oauth.accessToken
-        - name: oauth_accessTokenSecret
-          valueFrom:
-            configMapKeyRef:
-              name: twitter-acct-config
-              key: oauth.accessTokenSecret
+        #- name: oauth_consumerKey
+        #  valueFrom:
+        #    configMapKeyRef:
+        #      name: twitter-acct-config
+        #      key: oauth.consumerKey
+        #- name: oauth_consumerSecret
+        #  valueFrom:
+        #    configMapKeyRef:
+        #      name: twitter-acct-config
+        #      key: oauth.consumerSecret
+        #- name: oauth_accessToken
+        #  valueFrom:
+        #    configMapKeyRef:
+        #      name: twitter-acct-config
+        #      key: oauth.accessToken
+        #- name: oauth_accessTokenSecret
+        #  valueFrom:
+        #    configMapKeyRef:
+        #      name: twitter-acct-config
+        #      key: oauth.accessTokenSecret
+      volumes:
+      - name: config-volume
+        configMap:
+        name: twitter-acct-config
+        
