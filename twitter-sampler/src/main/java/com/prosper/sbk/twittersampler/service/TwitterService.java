@@ -4,6 +4,7 @@ import javax.annotation.PostConstruct;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
@@ -35,6 +36,12 @@ public class TwitterService {
 	private ThreadLocal<TwitterStream> twitterStreamLocal = new ThreadLocal<>();
 	private RestTemplate restTemplate = new RestTemplate();
 	
+	@Value("${oauth_consumerKey:null}")
+	protected String oauth_consumerKey;
+	
+	@Value("${oauth.consumerKey:null}")
+	protected String oauthConsumerKey;
+	
 	/**
 	 * Automatically start the sampling
 	 */
@@ -60,8 +67,11 @@ public class TwitterService {
 	 * Start sampling
 	 */
 	public void start() {
-		log.info("################### Environment variable oauth.consumerKey: "+System.getProperty("oauth_consumerKey"));
-		
+		log.info("################### Environment variable oauth_consumerKey: "+oauth_consumerKey);
+		log.info("################### Environment variable oauth.consumerKey: "+oauthConsumerKey);
+		System.getenv().entrySet().stream().forEach(k -> {
+			log.info("############ Env variable '"+k+"': "+System.getenv(k.toString()));	
+		});
 		
 		if(twitterStreamLocal.get()!=null) {
 			stop();
