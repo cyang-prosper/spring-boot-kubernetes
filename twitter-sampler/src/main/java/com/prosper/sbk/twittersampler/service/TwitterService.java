@@ -36,11 +36,18 @@ public class TwitterService {
 	private ThreadLocal<TwitterStream> twitterStreamLocal = new ThreadLocal<>();
 	private RestTemplate restTemplate = new RestTemplate();
 	
-	@Value("${oauth_consumerKey:null}")
-	protected String oauth_consumerKey;
-	
 	@Value("${oauth.consumerKey:null}")
 	protected String oauthConsumerKey;
+	
+	@Value("${oauth.consumerSecret:null}")
+	protected String oauthConsumerSecret;
+	
+	@Value("${oauth.accessToken:null}")
+	protected String oauthAccessToken;
+	
+	@Value("${oauth.accessTokenSecret:null}")
+	protected String oauthAccessTokenSecret;
+	
 	
 	/**
 	 * Automatically start the sampling
@@ -67,9 +74,11 @@ public class TwitterService {
 	 * Start sampling
 	 */
 	public void start() {
-		log.info("################### Environment variable oauth_consumerKey: "+oauth_consumerKey);
 		log.info("################### Environment variable oauth.consumerKey: "+oauthConsumerKey);
-		System.getenv().entrySet().stream().forEach(k -> {
+		log.info("################### Environment variable oauth.consumerSecret: "+oauthConsumerSecret);
+		log.info("################### Environment variable oauth.accessToken: "+oauthAccessToken);
+		log.info("################### Environment variable oauth.accessToeknSecret: "+oauthAccessTokenSecret);
+		System.getenv().keySet().stream().forEach(k -> {
 			log.info("############ Env variable '"+k+"': "+System.getenv(k.toString()));	
 		});
 		
