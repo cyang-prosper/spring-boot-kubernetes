@@ -27,3 +27,13 @@ spec:
             configMapKeyRef:
               name: twitter-acct-config
               key: oauth.consumerSecret
+        - name: oauth_accessToken
+          valueFrom:
+            configMapKeyRef:
+              name: twitter-acct-config
+              key: oauth.accessToken
+        - name: oauth_accessTokenSecret
+          valueFrom:
+            configMapKeyRef:
+              name: twitter-acct-config
+              key: oauth.accessTokenSecret

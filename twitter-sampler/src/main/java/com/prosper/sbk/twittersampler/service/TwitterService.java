@@ -120,7 +120,7 @@ public class TwitterService {
 	 */
 	@Scheduled(fixedRate = 5000)
     public void logEnvVariables() {
-		log.info("oauth.consumerKey: "+System.getenv("oauth.consumerKey"));
+		log.info("oauth.consumerKey: "+System.getenv("oauth_consumerKey"));
 	}
 	
 
