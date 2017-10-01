@@ -44,9 +44,15 @@ public class TwitterService {
 	}
 	
 	public void sendTweetToWordCount(String tweet) {
-		HttpEntity<?> requestEntity = new HttpEntity<Object>(tweet, requestHeaders);
-		ResponseEntity<String> response = restTemplate.exchange(twitterWordCountUrl, HttpMethod.POST, requestEntity, String.class);
-//		log.info("Response: "+response);
+		try {
+			HttpEntity<?> requestEntity = new HttpEntity<Object>(tweet, requestHeaders);
+			ResponseEntity<String> response = restTemplate.exchange(twitterWordCountUrl, HttpMethod.POST, requestEntity, String.class);
+			// log.info("Response: "+response);
+		}
+		catch(Exception ex) {
+			// Just log the error for demo purpose, do not error out.
+			log.error(ex.getMessage(), ex);
+		}
 	}
 	
 	
@@ -54,6 +60,9 @@ public class TwitterService {
 	 * Start sampling
 	 */
 	public void start() {
+		log.info("################### Environment variable oauth.consumerKey: "+System.getProperty("oauth_consumerKey"));
+		
+		
 		if(twitterStreamLocal.get()!=null) {
 			stop();
 		}

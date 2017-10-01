@@ -15,6 +15,15 @@ spec:
         ports:
         - name: tomcat-port
           containerPort: 8080
-        envFrom:
-        - configMapRef:
-          name: twitter-acct-config
+        env:
+        # consume the property-like keys in environment variables
+        - name: oauth_consumerKey
+          valueFrom:
+            configMapKeyRef:
+              name: twitter-acct-config
+              key: oauth_consumerKey
+        - name: oauth_consumerSecret
+          valueFrom:
+            configMapKeyRef:
+              name: twitter-acct-config
+              key: oauth_consumerSecret
