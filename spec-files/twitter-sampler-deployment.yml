@@ -17,12 +17,12 @@ spec:
           containerPort: 8080
         env:
         # consume the property-like keys in environment variables
-        - name: oauth.consumerKey
+        - name: oauth_consumerKey
           valueFrom:
             configMapKeyRef:
               name: twitter-acct-config
               key: oauth.consumerKey
-        - name: oauth.consumerSecret
+        - name: oauth_consumerSecret
           valueFrom:
             configMapKeyRef:
               name: twitter-acct-config
